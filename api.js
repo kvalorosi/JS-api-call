@@ -1,29 +1,18 @@
-//const res = fetch(`https://pokeapi.co/api/v2/pokemon/name`)
-//.then((res) => {return res.json()}).then((data) => {console.log(data)});
+//const apiUrl = "https://pokeapi.co/api/v2/ability/";
 
-const getPokeApiFetch = async (name) => {
-    const resp = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-    const data = await resp.json();
-    console.log('Async await fetch-', data);
-    return data;
-};
+const searchBox = document.querySelector(".search input");
+const searchBtn = document.querySelector(".search button");
+const nameElement = document.querySelector(".name h1");
+const spriteElement = document.querySelector(".sprite");
 
-getPokeApiFetch();
+async function findPoke(name){
+    const response = await fetch("https://pokeapi.co/api/v2/ability/");
+    var data = await response.json();
 
-let getData = async (name) => {
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-    console.log('Async/await AXIOS-', response.data);
-    return response.data
+    console.log(data)
+    
 }
-
-let loadData = async (name) => {
-    let data = await getData(name);
-    console.log(data);
-    let newRow = `<tr><th scope="row"></th><td>${data.name}</td></tr>`;
-    document.getElementById('pokeBody').insertAdjacentHTML('beforeend', newRow);
-
-}
-let clearData = () => {
-    document.getElementById('pokeBody').innerHTML = '';
-}
-
+searchBtn.addEventListener("click", ()=>{
+    findPoke(searchBox.value);
+})
+findPoke("ability-name");
